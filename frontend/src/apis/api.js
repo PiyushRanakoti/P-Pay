@@ -3,7 +3,7 @@ import { useGetUserId } from './hook'
 
 
 const API = axios.create({
-    baseURL : "http://localhost:5000/api/v1"
+    baseURL : "https://p-pay.onrender.com/api/v1"
 })
 
 
