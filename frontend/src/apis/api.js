@@ -1,11 +1,9 @@
 import axios from "axios";
-import dotenv from 'dotenv'
 
-config.dotenv()
 
 
 const API = axios.create({
-    baseURL : process.env.BASE_URL || 'https://localhost:5000/api/v1'
+    baseURL : 'https://p-pay.onrender.com/api/v1'
 })
 
 

@@ -14,7 +14,7 @@ export const Users = () => {
             getUsers(filter)
                 .then(res => setUsers(res.data.user))
                 .catch(err => console.log(err));
-        }, 500); // 300ms debounce
+        }, 400); // 300ms debounce
 
         return () => clearTimeout(handler);
     }, [filter]);
