@@ -24,6 +24,7 @@ export const SignUp = () => {
         try {
             const res = await signup(Form);
             sessionStorage.setItem("token",res.data.token) 
+            sessionStorage.setItem("userData",JSON.stringify(res.data.user))
             navigate('/dashboard')
         } catch (err){
             err = res.data.message

@@ -63,7 +63,7 @@ UserRouter.post("/signup", async (req,res) => {
         message : "User Created Successfully \nPlease Sign in to Use",
         token : token,
         user: {
-            id: userID,
+            id: NewUser._id,
             firstname: NewUser.firstname,
             lastname: NewUser.lastname,
         }
