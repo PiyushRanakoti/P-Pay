@@ -1,7 +1,11 @@
 const { default: mongoose, Mongoose } = require("mongoose");
 const { string } = require("zod");
+const dotenv = require('dotenv');
 
-mongoose.connect("mongodb+srv://ranakotipiyush25:Piyush%402509@cluster0.2d4ttx6.mongodb.net/paytm")
+dotenv.config();
+const DB_URL = process.env.DB_URL
+
+mongoose.connect(DB_URL)
 .then(()=>{
     console.log("DB Connected")
 })
@@ -40,7 +44,7 @@ const UserSchema = mongoose.Schema({
 })
 
 const AccountSchema = mongoose.Schema({
-    userId : {
+    userID : {
         type : mongoose.Schema.Types.ObjectId ,
         ref : 'User',
         required : true

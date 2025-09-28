@@ -1,4 +1,27 @@
+import { useState } from "react";
+import { DepoitMoney } from "../apis/api";
+import { useNavigate } from "react-router-dom";
+
+
+
 export const DepositMoney = () => {
+    const navigate = useNavigate()
+    const [amount, setamount] = useState(0);
+
+    const HandleDeposit = async () => {
+       try {
+         const res = await DepoitMoney({
+            amount
+         });
+         alert(res.data.message || "Deposit successful!");
+         navigate('/dashboard')
+       }
+       catch (err) {
+         console.error(err);
+         alert(err.response?.data?.message || "Transfer failed!");
+       }
+     }
+
     return <div class="flex justify-center h-screen bg-green-900">
         <div className="h-full flex flex-col justify-center">
                <div className="text-white text-center py-1 w-full">
@@ -40,9 +63,14 @@ export const DepositMoney = () => {
                         class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xl font-semibold"
                         id="amount"
                         placeholder="Enter amount"
+                        onChange={(e)=>{
+                            setamount(e.target.value)
+                        }}
                     />
                     </div>
-                    <button class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 hover:bg-green-700  text-white">
+                    <button class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 hover:bg-green-700  text-white"
+                        onClick={HandleDeposit}
+                    >
                         Deposit Money 
                     </button>
                 </div>

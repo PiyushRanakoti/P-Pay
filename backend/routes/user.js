@@ -3,8 +3,11 @@ const UserRouter = express.Router();
 const zod = require('zod')
 const {User , Account}= require('../db')
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config');
+const dotenv = require('dotenv');
 const  { AuthMiddleware } = require("../Middleware");
+
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET
 
 const SignUpCheck = zod.object({
     username : zod.string().email(),
@@ -41,19 +44,19 @@ UserRouter.post("/signup", async (req,res) => {
         lastname : req.body.lastname
     })
 
-    const UserId = NewUser._id
+    const userID = NewUser._id
 
     /// --------------------Create New account ----------------------
 
     await Account.create({
-        userId : UserId,
+        userID : userID,
         balance : 1 + Math.random()*10000
     })
 
     //----------------------------------
 
     const token = jwt.sign({
-        UserId
+         userID 
     },JWT_SECRET)
 
     return res.json({
@@ -92,7 +95,7 @@ UserRouter.post("/signin", async(req,res) => {
     }
 
     const token = jwt.sign({
-            userId : UserCheck._id
+            userID : UserCheck._id
         },JWT_SECRET)
 
     return res.json({
@@ -119,7 +122,7 @@ UserRouter.put("/update", AuthMiddleware, async (req,res) => {
     }
 
     await User.updateOne( 
-        { _id: req.userId },     
+        { _id: req.userID },     
         {$set : req.body }
     )
 

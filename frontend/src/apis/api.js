@@ -1,9 +1,8 @@
 import axios from "axios";
-import { useGetUserId } from './hook'
 
 
 const API = axios.create({
-    baseURL : "https://p-pay.onrender.com/api/v1"
+    baseURL : "http://localhost:5000/api/v1"
 })
 
 
@@ -22,6 +21,7 @@ export const getUsers = (filter = "") => API.get(`/user/bulk?filter=${filter}`);
 
 export const MoneyTransfer = (data) => {
   const token = sessionStorage.getItem("token");
+  
   return API.post("/account/transfer", data, {
     headers: { authorization: `Bearer ${token}` },
   });
@@ -35,6 +35,15 @@ export const getBalance = () =>{
             authorization: `Bearer ${token}`
             }
         });
+}
+
+export const DepoitMoney = (data) =>{
+  const token = sessionStorage.getItem("token")
+
+  return API.put("/account/deposit", data, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+
 }
 
  

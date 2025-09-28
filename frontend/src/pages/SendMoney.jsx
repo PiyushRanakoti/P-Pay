@@ -8,6 +8,7 @@ export const SendMoney = () => {
     const [SearchParams] = useSearchParams()
     const AccountID = SearchParams.get("id")
     const Name = SearchParams.get("name")
+    const FullName = Name.split("-")[0] + " " +  Name.split("-")[1]
 
     const HandleTranser = async () => {
     try {
@@ -15,7 +16,7 @@ export const SendMoney = () => {
         amount: Money,
         to : AccountID
       });
-      alert(res.data.message || "Transfer successful!");
+      alert(res.data.message + FullName || "Transfer successful!");
       navigate('/dashboard')
     }
     catch (err) {
@@ -44,7 +45,7 @@ export const SendMoney = () => {
                     <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
                     <span class="text-2xl text-white">{Name[0].toUpperCase()}</span>
                     </div>
-                    <h3 class="text-2xl font-semibold ">{Name.split(",")[0] + " " +  Name.split(",")[1] }</h3>
+                    <h3 class="text-2xl font-semibold ">{FullName }</h3>
                 </div>
                 <div class="space-y-4">
                     <div class="space-y-2">

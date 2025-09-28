@@ -2,43 +2,62 @@ const express = require('express');
 const AccountRouter = express.Router();
 const { User,  Account}= require('../db');
 const { AuthMiddleware } = require('../Middleware');
+const { default: mongoose } = require('mongoose');
 
 
 AccountRouter.get("/balance", AuthMiddleware, async (req,res) => {
-    const UserId = req.UserId
+     try {
+        const userID = req.userID;
+        // console.log("userID:", userID);
 
-    const account = await Account.findOne({
-        UserId
-    })
+        const account = await Account.findOne({
+            userID : new mongoose.Types.ObjectId(userID)
+        });
 
-    res.json({
-        balance : account.balance
-    })
+        // console.log("account:", account);
+
+        if (!account) {
+            return res.status(404).json({ error: "Account not found" });
+        }
+
+        res.json({ balance: account.balance });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
 })
 
 AccountRouter.put("/deposit",AuthMiddleware,async (req,res) => {
+   try{
+        const { amount } = req.body;
+        const userID = req.userID;
 
-    const Amount = req.body.amount
-    
-    const UserAccount = await Account.findOne({
-        userId : req.userId
-    })
+        const UserAccount = await Account.findOne({ 
+            userID: new mongoose.Types.ObjectId(userID) 
+        });
 
-   try {
-        
-        UserAccount.balance += Amount
-        await UserAccount.save()
+
+        if (!UserAccount) {
+            return res.status(404).json({ message: "Account not found" });
+        }
+
+        if (!amount || amount <= 0) {
+            return res.status(400).json({ message: "Invalid deposit amount" });
+        }
+
+        UserAccount.balance += Number(amount);
+        await UserAccount.save();
+
         res.json({
-            message : `${Amount} Successfully deposited in your account`
-        })
-
-    } catch (error) {
-         res.json({
-            message : `Deposit failed. Please try again later`
-        })
-   }
-
-
+            message: `₹${amount} successfully deposited in your account`,
+            balance: UserAccount.balance
+        });
+    }
+    catch (error) {
+    console.error(error);
+    res.status(500).json({
+        message: "Deposit failed. Please try again later"
+    })}
 
 
 })
@@ -47,17 +66,15 @@ AccountRouter.post("/transfer" , AuthMiddleware , async (req,res) => {
     const to = req.body.to
     const amount = Number(req.body.amount)
 
-    console.log(req.userId)
     const SenderAccount = await Account.findOne({
-        userId: req.userId
+        userID : req.userID
     })
 
     const ReceiverAccount = await Account.findOne({
-        userId: to
+        userID : to
     })
 
-    console.log(ReceiverAccount)
-    console.log(SenderAccount)
+  
 
     if(SenderAccount.balance < amount){
         return res.status(400).json({
@@ -75,18 +92,18 @@ AccountRouter.post("/transfer" , AuthMiddleware , async (req,res) => {
     // ------------------------Doing Transfer ----------------------------
 
      await Account.updateOne(
-        { userId: req.userId },
+        { userID: req.userID },
         { $inc: { balance: -amount } }
     );
 
     await Account.updateOne(
-        { userId: to },
+        { userID: to },
         { $inc: { balance: amount } }
     );
 
 
     res.json({
-        message: "Transfer successful"
+        message: `Transfered ₹${amount} successfully to `
     })
 
     
