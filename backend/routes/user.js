@@ -60,7 +60,7 @@ UserRouter.post("/signup", async (req,res) => {
     },JWT_SECRET)
 
     return res.json({
-        message : "User Created Successfully \nPlease Sign in to Use",
+        message : "User Created Successfully \nWelcome " + NewUser.firstname ,
         token : token,
         user: {
             id: NewUser._id,
