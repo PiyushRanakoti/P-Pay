@@ -15,12 +15,15 @@ export const SignIn = () => {
     const navigate = useNavigate();
     const handleSubmit = async () => {
         try {
-        const res = await signin(Form);
+            const res = await signin(Form);
+            alert(res.data.message)
             sessionStorage.setItem("token", res.data.token);
+            sessionStorage.setItem("userData",JSON.stringify(res.data.user))
             navigate("/dashboard")
             
         } catch (err) {
-                alert("sign in failed");
+                err = res.data.message
+                alert( "sign in failed");
             }
     };
 

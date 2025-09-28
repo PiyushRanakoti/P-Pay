@@ -51,11 +51,11 @@ export const SignUp = () => {
                 value={Form.password}
             onChange={(v) => handleChange("password", v)}/>
 
-                <InputBox label={'Narendra..'} Head={'FirstName'}
+                <InputBox label={'Emiway'} Head={'FirstName'}
                 value={Form.firstname}
             onChange={(v) => handleChange("firstname", v)}/>
 
-                <InputBox label={'Modi...'} Head={'LastName'}
+                <InputBox label={'Bantai'} Head={'LastName'}
                 value={Form.lastname}
             onChange={(v) => handleChange("lastname", v)}/>
 

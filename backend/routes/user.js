@@ -61,7 +61,12 @@ UserRouter.post("/signup", async (req,res) => {
 
     return res.json({
         message : "User Created Successfully \nPlease Sign in to Use",
-        token : token
+        token : token,
+        user: {
+            id: userID,
+            firstname: NewUser.firstname,
+            lastname: NewUser.lastname,
+        }
     })
 
 })
@@ -89,7 +94,7 @@ UserRouter.post("/signin", async(req,res) => {
     })
 
     if(!UserCheck){
-        res.status(400).json({
+        return res.status(400).json({
             message : "User Doesn't Exist"
         })
     }
@@ -99,8 +104,14 @@ UserRouter.post("/signin", async(req,res) => {
         },JWT_SECRET)
 
     return res.json({
-        name : UserCheck.firstname,
-        token : token
+        message : `Welcome ${UserCheck.firstname}` ,
+        token : token,
+        user: {
+            id: UserCheck._id,
+            firstname: UserCheck.firstname,
+            lastname: UserCheck.lastname,
+        }
+        
     })
 
 })

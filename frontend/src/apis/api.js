@@ -1,9 +1,8 @@
 import axios from "axios";
 
-
-
 const API = axios.create({
-    baseURL : 'https://p-pay.onrender.com/api/v1'
+    //  baseURL : 'http://localhost:5000/api/v1'               //for testing
+    baseURL : 'https://p-pay.onrender.com/api/v1'        //for deployment
 })
 
 

@@ -2,80 +2,89 @@ import { useState } from "react";
 import { DepoitMoney } from "../apis/api";
 import { useNavigate } from "react-router-dom";
 
-
-
 export const DepositMoney = () => {
-    const navigate = useNavigate()
-    const [amount, setamount] = useState(0);
+  const navigate = useNavigate();
+  const [amount, setAmount] = useState(0);
+  const [Deposit, setDeposit] = useState(false);
 
-    const HandleDeposit = async () => {
-       try {
-         const res = await DepoitMoney({
-            amount
-         });
-         alert(res.data.message || "Deposit successful!");
-         navigate('/dashboard')
-       }
-       catch (err) {
-         console.error(err);
-         alert(err.response?.data?.message || "Transfer failed!");
-       }
-     }
+  const userDataString = sessionStorage.getItem("userData");
+  const userData = userDataString ? JSON.parse(userDataString) : null;
 
-    return <div class="flex justify-center h-screen bg-green-900">
-        <div className="h-full flex flex-col justify-center">
-               <div className="text-white text-center py-1 w-full">
-        <div className="text-5xl font-extrabold pl-4">      P-Pay 💸
-    </div>
-    <div className="text-sm font-medium mt-1 text-white underline pb-4">Your dummy UPI App</div> 
-  </div>
-            
-            <div class="border h-min text-card-foreground max-w-md p-4 space-y-8 w-96 bg-white shadow-lg rounded-lg">
-                 
-                <div className="flex justify-center h-6 grid-cols-1">
-                    
-                     <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                    <span class="text-2xl text-white">A</span>
-                    </div>
-                    
-                    <div className="mt-2.5 ml-3 mr-8 font-semibold text-lg text-black w-2.5">
-                        Name
-               </div>
+  const FirstName = userData?.firstname || "User";
+  const LastName = userData?.lastname || "";
+  const id = userData?.id || "";
 
-                </div>
+  const HandleDeposit = async () => {
+    if (Deposit) return;
+    setDeposit(true);
+    try {
+      const res = await DepoitMoney({ amount });
+      alert(res.data.message || "Deposit successful!");
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Deposit failed!");
+    } finally {
+      setDeposit(false);
+    }
+  };
 
-     
-                <div class="flex flex-col pt-2 ">
-                <h2 class="text-3xl font-bold text-center">Deposit Money</h2>
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-green-900 px-4">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center text-white mb-6">
+          <div className="text-5xl font-extrabold">P-Pay 💸</div>
+          <div className="text-sm font-medium mt-1 underline">Your dummy UPI App</div>
+        </div>
 
-                <h5 class="text-md font-semibold text-center" >into your account</h5>
-                
-                <div class="space-y-4 pt-5">
-                    <div class="space-y-2">
-                    <label
-                        class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        for="amount"
-                    >
-                        Amount (in Rs)
-                    </label>
-                    <input
-                        type="number"
-                        class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-xl font-semibold"
-                        id="amount"
-                        placeholder="Enter amount"
-                        onChange={(e)=>{
-                            setamount(e.target.value)
-                        }}
-                    />
-                    </div>
-                    <button class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 hover:bg-green-700  text-white"
-                        onClick={HandleDeposit}
-                    >
-                        Deposit Money 
-                    </button>
-                </div>
-                </div>
+        {/* Card */}
+        <div className="bg-white rounded-lg shadow-lg p-6 space-y-6 border-t-4 border-green-500">
+          {/* User Info */}
+          <div className="flex items-center space-x-4 bg-gray-50 p-3 rounded-md shadow-sm">
+            <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
+              <span className="text-2xl text-white font-bold">{FirstName[0].toUpperCase()}</span>
+            </div>
+            <div className="flex flex-col">
+              <h3 className="text-lg font-semibold">{`${FirstName} ${LastName}`}</h3>
+              <span className="text-sm text-gray-500">USER-ID: {id.toString().slice(-6)}</span>
+            </div>
+          </div>
+
+          {/* Title */}
+          <div className="text-center space-y-1">
+            <h2 className="text-3xl font-bold">Deposit Money</h2>
+            <p className="text-md text-gray-600">into your account</p>
+          </div>
+
+          {/* Input */}
+          <div className="space-y-4">
+            <div className="flex flex-col space-y-1">
+              <label htmlFor="amount" className="text-sm font-medium text-gray-700">
+                Amount (in Rs)
+              </label>
+              <input
+                type="number"
+                id="amount"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="w-full h-10 px-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-green-400 text-lg font-semibold"
+              />
+            </div>
+
+            <button
+              onClick={HandleDeposit}
+              disabled={Deposit}
+              className={`w-full h-10 rounded-md text-white font-semibold transition-colors ${
+                Deposit ? "bg-gray-400 cursor-not-allowed" : "bg-green-500 hover:bg-green-600"
+              }`}
+            >
+              {Deposit ? "Crediting Deposit..." : "Deposit Money"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
-}
+  );
+};
