@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DepoitMoney } from "../apis/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export const DepositMoney = () => {
   const navigate = useNavigate();
@@ -19,11 +20,11 @@ export const DepositMoney = () => {
     setDeposit(true);
     try {
       const res = await DepoitMoney({ amount });
-      alert(res.data.message || "Deposit successful!");
+      toast.success(res.data.message || "Deposit successful!");
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Deposit failed!");
+      toast.error(err.response?.data?.message || "Deposit failed!");
     } finally {
       setDeposit(false);
     }
@@ -47,7 +48,7 @@ export const DepositMoney = () => {
             </div>
             <div className="flex flex-col">
               <h3 className="text-lg font-semibold">{`${FirstName} ${LastName}`}</h3>
-              <span className="text-sm text-gray-500">USER-ID: {id.toString().slice(-6)}</span>
+              <span className="text-sm text-gray-500">ID: {id.toString().slice(-6)}</span>
             </div>
           </div>
 

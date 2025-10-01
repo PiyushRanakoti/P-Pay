@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { MoneyTransfer } from "../apis/api";
+import { toast } from "sonner";
 
 export const SendMoney = () => {
     const navigate = useNavigate()
@@ -22,12 +23,12 @@ export const SendMoney = () => {
           amount: Money,
           to : AccountID
         });
-        alert(res.data.message + FullName || "Transfer successful!");
+        toast.success(res.data.message + FullName || "Transfer successful!");
         navigate('/dashboard')
       }
       catch (err) {
         console.error(err);
-        alert(err.response?.data?.message || "Transfer failed!");
+        toast.error(err.response?.data?.message || "Transfer failed!");
       }
       finally{
         setSending(false);
@@ -35,6 +36,7 @@ export const SendMoney = () => {
   }
 
     return <div class="flex justify-center h-screen bg-green-900">
+      
         <div className="h-full flex flex-col justify-center">
    
            <div className="text-white text-center py-3 w-full">
@@ -42,9 +44,13 @@ export const SendMoney = () => {
     </div>
     <div className="text-sm font-medium mt-1 text-white underline pb-4">Your dummy UPI App</div> 
   </div>
+
+  
             <div class="border h-min text-card-foreground max-w-md p-4 space-y-4 w-96 bg-white shadow-lg rounded-lg"
             >
+              
                 <div class="flex flex-col pt-2">
+                  
                 <h2 class="text-3xl font-bold text-center">Send Money</h2>
                 <h5 class="text-md font-semibold text-center" >into { DecodedName.split("-")[0]}'s account</h5>
                 </div>
@@ -85,7 +91,9 @@ export const SendMoney = () => {
                         {(Sending) ? "Transfering..." : "Intiate Transfer"}
                     </button>
                 </div>
+                
                 </div>
+                
         </div>
       </div>
     </div>

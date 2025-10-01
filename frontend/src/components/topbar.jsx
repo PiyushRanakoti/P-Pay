@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 export function Topbar() {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export function Topbar() {
   function Logout(){
       sessionStorage.clear();
       navigate('/signin')
-      alert("Logged Out SuccessFully!!")
+      toast.success("Logged out Successfully !!")
 
   }
 

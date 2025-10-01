@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes,Route, Navigate } from 'react-router-dom'
+import { Toaster } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
 import  { SignUp }  from './pages/signup';
 import { SignIn } from './pages/signin';
 import { DashBoard } from './pages/dashborad';
@@ -44,6 +46,22 @@ function App() {
         </Routes>
       
       </BrowserRouter>
+
+      {/* GLOBAL toast container  */}
+         <Toaster   position="top-center" 
+          richColors={true} 
+          reverseOrder={false} 
+            toastOptions={{
+            duration : 2000,  
+            style: {
+            fontSize: '18px',       // larger text
+            padding: '16px 24px',   // bigger padding
+            minWidth: '300px',      // wider toast
+            borderRadius: '12px',   // rounded corners
+          },
+        }}/>
+
+
    </>
 )
 }

@@ -6,25 +6,34 @@ import { InputBox } from "../components/input"
 import { SubHeading } from "../components/subheading"
 import { useState } from "react"
 import { signin } from "../apis/api"
+import { toast } from "sonner";
+import "react-toastify/dist/ReactToastify.css";
+
 
 export const SignIn = () => {
     const [Form, setForm] = useState({ username: "", password: "" }); 
     const handleChange = (field, value) => setForm({ ...Form, [field]: value });
-
+    const [Loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
     const handleSubmit = async () => {
+        if(Loading) 
+            return;
+        setLoading(true)
         try {
             const res = await signin(Form);
-            alert(res.data.message)
+            toast.success(res.data.message)
             sessionStorage.setItem("token", res.data.token);
             sessionStorage.setItem("userData",JSON.stringify(res.data.user))
             navigate("/dashboard")
+           
             
         } catch (err) {
-                err = res.data.message
-                alert( "sign in failed");
-            }
+            toast.error(err.response?.data?.message || "Sign in Failed");
+        }
+        finally{
+            setLoading(false)
+        }
     };
 
 
@@ -60,9 +69,3 @@ export const SignIn = () => {
 
 
 
-function SignInputs(){
-  
-    return <div>
-
-    </div>
-}
