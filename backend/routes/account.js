@@ -74,9 +74,9 @@ AccountRouter.post("/transfer" , AuthMiddleware , async (req,res) => {
         userID : to
     })
 
-  
+    
 
-    if(SenderAccount.balance < amount){
+    if(SenderAccount.balance < amount || amount < 0){
         return res.status(400).json({
             message : "Insufficient Balance"
         })

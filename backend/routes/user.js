@@ -82,7 +82,7 @@ UserRouter.post("/signin", async(req,res) => {
 
     if(!success){
         return res.status(400).json({
-            message : "Some Error in Login please Try again"
+            message : "Invalid Signin Inputs"
         })
     }
 
@@ -95,7 +95,7 @@ UserRouter.post("/signin", async(req,res) => {
 
     if(!UserCheck){
         return res.status(400).json({
-            message : "User Doesn't Exist"
+            message : "Incorrect Username or Password !! Try Again"
         })
     }
 
