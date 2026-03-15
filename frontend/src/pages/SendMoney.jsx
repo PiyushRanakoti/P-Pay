@@ -23,7 +23,7 @@ export const SendMoney = () => {
           amount: Money,
           to : AccountID
         });
-        toast.success(res.data.message + FullName || "Transfer successful!");
+        toast.success(res.data.message + " to " + FullName || "Transfer successful!");
         navigate('/dashboard')
       }
       catch (err) {

@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+const TEST_URL = import.meta.env.VITE_TEST_URL
+
 const API = axios.create({
-    //  baseURL : 'http://localhost:5000/api/v1'               //for testing
-    baseURL : 'https://p-pay.onrender.com/api/v1'        //for deployment
+    baseURL : BASE_URL              //for Deployment
+    // baseURL : TEST_URL        //for testing
 })
 
 

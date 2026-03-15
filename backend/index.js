@@ -12,9 +12,8 @@ app.use(express.json())
 app.use("/api/v1",RootRouter);
 
 
-
 app.listen(PORT,()=>{
-    console.log("server start ")
+    console.log(`server start on PORT ${PORT}`)
 })
 
 

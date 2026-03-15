@@ -11,7 +11,7 @@ export function Balancebar(){
     useEffect(() => {
     getBalance()
       .then((res) => {
-        setBalance(res.data.balance);
+        setBalance(Number(res.data.balance));
       })
       .catch((err) => console.error("Error fetching balance:", err));
   }, []);
