@@ -1,65 +1,65 @@
 # P-Pay 💸
 
-**P-Pay** is a simple, dummy UPI application built with **React** and **Node.js** to simulate sending and depositing money between users. It provides a modern and intuitive interface to manage user accounts, perform transactions, and view user information.
+**P-Pay** is a simple and fast payments app built with **React ⚛️** and **Node.js 🟢** to simulate sending and depositing money between users. It provides a modern and intuitive interface to manage user accounts, perform transactions, and view user information.
 
 ---
 
-## Features
+## ✨ Features
 
-- **User Signup & Signin**  
-  Create an account or log in securely.  
+- 🔐 **User Signup & Signin**  
+  Create an account or log in securely.
 
-- **Dashboard**  
-  Displays current balance and registered users.  
+- 📊 **Dashboard**  
+  Displays current balance and registered users.
 
-- **Send Money**  
-  Transfer money to other users with a single click.  
+- 💸 **Send Money**  
+  Transfer money to other users with a single click.
 
-- **Deposit Money**  
-  Add funds to your account.  
+- 💰 **Deposit Money**  
+  Add funds to your account.
 
-- **User Filtering**  
-  Search users by first name, last name  
+- 🔎 **User Filtering**  
+  Search users by first name or last name.
 
-- **Modern UI**  
-  Responsive and minimal design with avatars and clear typography.  
+- 🎨 **Modern UI**  
+  Responsive and minimal design with avatars and clear typography.
 
-- **Session Management**  
-  Stores user token and details in sessionStorage for secure authentication.
-
----
-
-## Tech Stack
-
-- **Frontend:** React, TailwindCSS, and Various React Sub-libraries 
-- **Backend:** Node.js, Express, MongoDB (with Mongoose)  
-- **Authentication:** JWT  
-- **API Requests:** Axios  
+- 🔑 **Session Management**  
+  Stores user token and details in `sessionStorage` for secure authentication.
 
 ---
 
-## Usage
+## 🛠 Tech Stack
 
-- Sign up with your first name, last name, username, and password.
+- **Frontend:** React ⚛️, TailwindCSS 🎨, and various React sub-libraries  
+- **Backend:** Node.js 🟢, Express 🚀  
+- **Database:** PostgreSQL 🐘  
+- **Authentication:** JWT 🔐  
+- **API Requests:** Axios 🌐  
 
-Sign in to access the dashboard.
+---
 
-Send money to other users or deposit funds into your account.
+## 🚀 Usage
 
-Search users easily using the filter bar.
+1. ✍️ **Sign up** with your first name, last name, username, and password.
+2. 🔑 **Sign in** to access the dashboard.
+3. 📊 **View your balance** and other registered users.
+4. 💸 **Send money** to other users.
+5. 💰 **Deposit funds** into your account.
+6. 🔍 **Search users** easily using the filter bar.
+7. 🚪 **Log out** safely using the logout button.
 
-Log out safely using the logout button.
+---
 
-## Future Features
+## 🔮 Future Features
 
-Transaction history with timestamps.
+- 📜 Transaction history with timestamps  
+- 🔎 Enhanced user filtering with sorting options  
+- ⚡ Real-time balance updates and notifications  
+- 🔐 Better authentication with refresh tokens  
 
-Enhanced user filtering with sorting options.
+---
 
-Real-time balance updates and notifications.
+## 📄 License
 
-Better authentication with refresh tokens.
-
-## License
-
-This project is for educational purposes and is not meant for real financial transactions.
+This project is created for **educational purposes only 🎓** and is **not meant for real financial transactions 💳**.
