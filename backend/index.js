@@ -11,12 +11,6 @@ app.use(express.json())
 
 app.use("/api/v1",RootRouter);
 
-async function start() {
-  await waitForDB();   
-  app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log("Server running on", PORT);
   });
-}
-
-start();
-

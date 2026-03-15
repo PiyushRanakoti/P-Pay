@@ -20,23 +20,11 @@ pool.connect()
     console.error("Connection failed:", err);
 });
 
-async function waitForDB() {
-  while (true) {
-    try {
-      await pool.query("SELECT 1");
-      console.log("DB READY");
-      return;
-    } catch {
-      console.log("Waiting for DB...");
-      await new Promise(r => setTimeout(r, 2000));
-    }
-  }
-}
 
 
 
 module.exports = {
-    pool , waitForDB
+    pool 
 }
 
 
