@@ -84,20 +84,20 @@ export const SignUp = () => {
 
           <InputBox
             label={"Emiway"}
-            Head={"FirstName"}
+            Head={"First Name"}
             value={Form.firstname}
             onChange={(v) => handleChange("firstname", v)}
           />
 
           <InputBox
             label={"Bantai"}
-            Head={"LastName"}
+            Head={"Last Name"}
             value={Form.lastname}
             onChange={(v) => handleChange("lastname", v)}
           />
 
           <Button
-            label={submitting ? "Submitting..." : "Submit"}
+            label={submitting ? "Signing you up..." : "Sign up"}
             onClick={handleSubmit}
           />
 

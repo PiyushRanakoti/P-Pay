@@ -51,6 +51,13 @@ TransferRouter.post("/transfer", AuthMiddleware, async (req,res)=>{
       [amount, receiver]
     );
 
+    // Insert transaction record
+    await client.query(
+      `INSERT INTO public.transactions (sender_id, receiver_id, amount, type)
+       VALUES ($1, $2, $3, $4)`,
+      [sender, receiver, amount, 'transfer']
+    );
+
     await client.query("COMMIT");
 
     res.json({

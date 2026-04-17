@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
+
 
 export function Topbar() {
   const navigate = useNavigate()
@@ -11,24 +12,25 @@ export function Topbar() {
   const LastName = userData.lastname;
   const id = userData.id;
 
-  function Logout(){
-      sessionStorage.clear();
-      navigate('/signin')
-      toast.success("Logged out Successfully !!")
-
+  function Logout() {
+    sessionStorage.clear();
+    navigate('/signin')
+    toast.success("Logged out Successfully !!")
   }
 
   return (
     <div className="flex justify-between items-center bg-green-200 border-2 border-black rounded-md max-w-full mx-2 my-5 p-3">
-      {/* Logo / App Name */}
-      <div className="flex flex-col">
-        <div className="text-4xl font-bold text-emerald-900 drop-shadow-[0_0_2px_white] tracking-wide">
-          P-Pay💸
+      {/* Logo / App Name - Clickable */}
+      <Link to="/dashboard" className="cursor-pointer hover:opacity-80 transition">
+        <div className="flex flex-col">
+          <div className="text-4xl font-bold text-emerald-900 drop-shadow-[0_0_2px_white] tracking-wide">
+            P-Pay💸
+          </div>
+          <div className="text-sm font-semibold text-black mt-1">
+            Your dummy UPI App
+          </div>
         </div>
-        <div className="text-sm font-semibold text-black mt-1">
-          Your dummy UPI App
-        </div>
-      </div>
+      </Link>
 
       {/* User Info + Logout */}
       <div className="flex items-center space-x-4">
@@ -44,8 +46,8 @@ export function Topbar() {
 
         {/* Logout Button */}
         <button className="bg-red-500 hover:bg-red-600 text-white font-semibold text-sm px-2 py-1 rounded border-1 border-black" onClick={Logout}>
-            Logout
-          </button>
+          Logout
+        </button>
       </div>
     </div>
   );

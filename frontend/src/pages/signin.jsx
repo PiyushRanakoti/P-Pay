@@ -58,7 +58,10 @@ export const SignIn = () => {
                 value={Form.password}
             onChange={(v) => handleChange("password", v)}/>
                
-                <Button label={"Submit"} onClick={handleSubmit} ></Button>
+                <Button
+            label={Loading ? "Logging in.." : "Login"}
+            onClick={handleSubmit}
+          />
 
                 <BottomWarning label={"Don't Have a Account?"} buttonText={"Sign up"} to={"/signup"}/>
             </div>

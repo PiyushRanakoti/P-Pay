@@ -2,6 +2,8 @@ import { useState } from "react";
 import { DepoitMoney } from "../apis/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { LuArrowLeft } from "react-icons/lu";
+
 
 export const DepositMoney = () => {
   const navigate = useNavigate();
@@ -34,6 +36,7 @@ export const DepositMoney = () => {
     <div className="flex justify-center items-center min-h-screen bg-green-900 px-4">
       <div className="w-full max-w-md">
         {/* Header */}
+        
         <div className="text-center text-white mb-6">
           <div className="text-5xl font-extrabold">P-Pay 💸</div>
           <div className="text-sm font-medium mt-1 underline">Your dummy UPI App</div>
@@ -41,16 +44,37 @@ export const DepositMoney = () => {
 
         {/* Card */}
         <div className="bg-white rounded-lg shadow-lg p-6 space-y-6 border-t-4 border-green-500">
-          {/* User Info */}
-          <div className="flex items-center space-x-4 bg-gray-50 p-3 rounded-md shadow-sm">
-            <div className="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-              <span className="text-2xl text-white font-bold">{FirstName[0].toUpperCase()}</span>
-            </div>
-            <div className="flex flex-col">
-              <h3 className="text-lg font-semibold">{`${FirstName} ${LastName}`}</h3>
-              <span className="text-sm text-gray-500">ID: {id.toString().slice(-6)}</span>
-            </div>
-          </div>
+     <div className="flex items-center gap-3 mb-4">
+
+  {/* Back Button */}
+  <button
+    onClick={() => navigate(-1)}
+    className="p-2 rounded-full hover:bg-gray-200 transition"
+  >
+    <LuArrowLeft size={20} />
+  </button>
+
+  {/* User Info */}
+  <div className="flex items-center gap-3 flex-1">
+
+    <div className="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center shrink-0">
+      <span className="text-lg text-white font-bold">
+        {FirstName[0].toUpperCase()}
+      </span>
+    </div>
+
+    <div className="leading-tight">
+      <h3 className="text-base font-semibold">
+        {FirstName} {LastName}
+      </h3>
+      <span className="text-xs text-gray-500">
+        ID: {id.toString().slice(-6)}
+      </span>
+    </div>
+
+  </div>
+
+</div>
 
           {/* Title */}
           <div className="text-center space-y-1">
